@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  app-core:
+    image: varun10000/ack-app-core:latest
+    build:
+      context: src/backend
+      dockerfile: Dockerfile
+    container_name: ack-app-core
+    command: ["sh", "-c", node index.js"]
+    profiles:
+      - "backend"
+      - "app"
+    ports:
+      - 8000:8000
+    env_file:
+      - envs/.env.local
+  app-ui:
+    image: varun10000/ack-app-ui:latest
+    build:
+      context: src/frontend
+      dockerfile: Dockerfile
+    container_name: ack-app-ui
+    command: ["sh", "-c", npm run serve]
+    depends_on:
+      app-core:
+        condition: service_healthy
+    env_file:
+      - envs/.env.local
+    profiles:
+      - "frontend"
+      - "app"
+    ports:
+      - 3000:3000
