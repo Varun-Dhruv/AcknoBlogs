@@ -10,9 +10,11 @@ install:
 	
 dev-core:
 	@echo "Building development version"
+	@cd src/backend/app && pnpm run dev
 
 dev-ui:
 	@echo "Building development version"
+	@cd src/frontend/app && pnpm run dev
 
 clean:
 	@echo "Cleaning up"
