@@ -7,7 +7,7 @@ services:
       context: src/backend
       dockerfile: Dockerfile
     container_name: ack-app-core
-    command: ["sh", "-c", node index.js"]
+    command: ["sh", "-c", "node index.js"]
     profiles:
       - "backend"
       - "app"
@@ -21,7 +21,7 @@ services:
       context: src/frontend
       dockerfile: Dockerfile
     container_name: ack-app-ui
-    command: ["sh", "-c", npm run serve]
+    command: ["sh", "-c", "npm run start"]
     depends_on:
       app-core:
         condition: service_healthy

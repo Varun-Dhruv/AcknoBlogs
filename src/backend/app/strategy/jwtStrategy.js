@@ -13,7 +13,6 @@ var opts = {
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {
     try {
-      console.log("jwt_payload", jwt_payload);
       let user = await User.findOne({ _id: jwt_payload._id }, { __v: 0 });
       user.password = undefined;
       if (user) {

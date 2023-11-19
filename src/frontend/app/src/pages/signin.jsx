@@ -38,7 +38,7 @@ const SignInCard = () => {
         title: ""
     })
     const handleSignIn = (event) => {
-        event.preventDefault()
+        event.preventDefault()  
         if (userCredentials.email === '' || userCredentials.password === '') {
             return alert('Please fill in all the fields')
         }
@@ -47,6 +47,8 @@ const SignInCard = () => {
             axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/signin`, {
                 email: userCredentials.email,
                 password: userCredentials.password,
+            },{
+                'Access-Control-Allow-Origin': '*',
             }).then(({ data }) => {
                 auth.updateState({
                     authenticated: true,

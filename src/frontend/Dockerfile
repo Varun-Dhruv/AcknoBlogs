@@ -1,12 +1,14 @@
-FROM node:18.0.0-alpine3.14 as frontend
+FROM node:18.0.0-alpine3.14
 
 WORKDIR /app
 
 COPY app/package.json /app
 
-RUN npm install --production
+RUN npm install -g pnpm 
+
+RUN pnpm install 
 
 COPY app /app
 
-RUN npm run build
+RUN pnpm run build
 

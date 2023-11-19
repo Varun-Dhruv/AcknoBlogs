@@ -21,3 +21,6 @@ clean:
 
 deploy:
 	@echo "Deploying"
+	@okteto context use "https://cloud.okteto.com"
+	@okteto deploy -n varun-dhruv --build
+	

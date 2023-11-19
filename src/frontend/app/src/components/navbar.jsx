@@ -53,7 +53,7 @@ export default function Navbar() {
                                 colorScheme={'green'}
                                 size={{ md: 'md', base: 'sm' }}
                                 onClick={() => {
-                                    router.push('/signin')
+                                    router.push('/signup')
                                 }}>
                                 Sign Up
                             </Button>
