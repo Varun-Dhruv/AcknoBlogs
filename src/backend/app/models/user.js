@@ -16,7 +16,6 @@ const userSchema = new mongoose.Schema(
 );
 
 const generateAuthToken = (payload) => {
-  console.log("privatekey", process.env.JWTPRIVATEKEY);
   const token =
     "Bearer " +
     jwt.sign(JSON.parse(JSON.stringify(payload)), process.env.JWTPRIVATEKEY, {
@@ -38,7 +37,7 @@ const validateSignup = (data) => {
 const validateLogin = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("email"),
-    password: passwordComplexity().required().label("password"),
+    password: Joi.string().required().label("password")
   });
   return schema.validate(data);
 };

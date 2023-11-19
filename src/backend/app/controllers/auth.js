@@ -17,11 +17,11 @@ const signin = async (req, res, next) => {
       { __v: 0, createdAt: 0, updatedAt: 0 }
     );
     if (!user) {
-      return res.status(400).send({ message: "Invalid email or password" });
+      return res.status(401).send({ message: "Invalid email or password" });
     }
     const validPassword = await argon2.verify(user.password, password);
     if (!validPassword) {
-      return res.status(400).send({ message: "Invalid email or password" });
+      return res.status(401).send({ message: "Invalid email or password" });
     }
     user.password = undefined;
     const token = generateAuthToken(user);
@@ -55,7 +55,7 @@ const signup = async (req, res, next) => {
     await newUser.save();
     newUser.password = undefined;
     const token = generateAuthToken(newUser);
-    return res.status(200).send({ newUser, token });
+    return res.status(200).send({ user: newUser, token });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "Internal Server Error" });
