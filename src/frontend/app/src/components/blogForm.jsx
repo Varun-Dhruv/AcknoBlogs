@@ -8,8 +8,9 @@ import {
     Textarea,
     VStack,
 } from '@chakra-ui/react';
-
-
+import FormData from 'form-data'
+import axios from "axios"
+import { useRouter } from 'next/router';
 const BlogForm = ({ title, slug, image, description, content }) => {
     const [formData, setFormData] = useState({
         title: title,
@@ -18,6 +19,7 @@ const BlogForm = ({ title, slug, image, description, content }) => {
         description: description,
         content: content,
     });
+    const router = useRouter()
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -30,8 +32,28 @@ const BlogForm = ({ title, slug, image, description, content }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let data = new FormData();
+        // console.log(formData)
+        data.append('title', formData.title);
+        data.append('slug', formData.slug);
+        data.append('description', formData.description);
+        data.append('image', formData.image);
+        data.append('content', formData.content);
         console.log(formData);
-    };
+        const token = window.localStorage.getItem('auth_token')
+
+        const headers = {
+            'Authorization': token
+        };
+        axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/blogs`, data, { headers })
+            .then(({ data }) => {
+                console.log(data)
+            }).catch((error) => {
+                console.error(error)
+            }).finally(() => {
+                router.push("/blogs")
+            })
+    }
 
     return (
         <Box mt={8} mb={16} mx={"auto"} maxWidth={{ md: 900, base: 600 }} p={4} borderWidth="1px" borderRadius="lg">

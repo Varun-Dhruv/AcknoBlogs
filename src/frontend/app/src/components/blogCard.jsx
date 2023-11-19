@@ -11,13 +11,29 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import axios from "axios"
 
 
-const BlogCard = ({ editable }) => {
+const BlogCard = ({ id, editable, title, description, image, author, publish_date }) => {
     const router = useRouter();
-    const handleDelete = () => {
+    const handleDelete = (id) => {
+        const token = window.localStorage.getItem('auth_token')
+        let config = {
+            method: 'delete',
+            maxBodyLength: Infinity,
+            url: `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/${id}`,
+            headers: {
+                'Authorization': token
+            }
+        };
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
-
     return (
         <Center py={6}>
             <Box
@@ -31,7 +47,7 @@ const BlogCard = ({ editable }) => {
                 overflow={'hidden'}>
                 <Box h={'220px'} bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
                     <Image
-                        src='/blog.avif'
+                        src={image}
                         fill
                         alt="Example"
                     />
@@ -50,12 +66,10 @@ const BlogCard = ({ editable }) => {
                         color={useColorModeValue('gray.700', 'white')}
                         fontSize={'2xl'}
                         fontFamily={'body'}>
-                        Boost your conversion rate
+                        {title}
                     </Heading>
                     <Text color={'gray.500'}>
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                        voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                        {description}
                     </Text>
                 </Stack>
                 {
@@ -67,19 +81,24 @@ const BlogCard = ({ editable }) => {
                         >
                             <Button
                                 colorScheme='green'
-                                onClick={(event) => { router.push("/blogs/update/:id") }}
+                                onClick={(event) => { router.push(`/blogs/update/${id}`) }}
                             >
                                 Update
                             </Button>
                             <Button
                                 colorScheme='red'
-                                onClick={(event) => { console.log('updateBlog') }}
+                                onClick={(event) => {
+                                    event.preventDefault()
+                                    handleDelete(id)
+                                }}
                             >
                                 Delete
                             </Button>
                             <Button
                                 colorScheme='blue'
-                                onClick={(event) => { router.push("/blogs/:id") }}
+                                onClick={(event) => {
+                                    router.push(`/blogs/${id}`)
+                                }}
                             >
                                 View
                             </Button>
@@ -88,15 +107,15 @@ const BlogCard = ({ editable }) => {
                         </Stack>
                         :
                         <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
-                            <Avatar src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} />
+                            <Avatar name={author} />
                             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-                                <Text fontWeight={600}>Achim Rolle</Text>
-                                <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
+                                <Text fontWeight={600}>{author}</Text>
+                                <Text color={'gray.500'}>{publish_date} · 6min read</Text>
                             </Stack>
                         </Stack>
                 }
             </Box>
-        </Center>
+        </Center >
     )
 }
 

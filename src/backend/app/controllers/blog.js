@@ -2,6 +2,7 @@ const { Blog } = require("../models/blog");
 const { validateBlog } = require("../models/blog");
 const fs = require("fs");
 const path = require("path");
+const mongoose = require("mongoose");
 
 const createBlog = async (req, res, next) => {
   try {
@@ -75,12 +76,16 @@ const getBlog = async (req, res, next) => {
 
 const getBlogByAuthor = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const blogs = await Blog.find({ author: id }).populate(
-      "author",
-      "-password"
-    );
-    return res.status(200).send(blogs);
+    let { id, page, limit } = req.query;
+    page = page ? parseInt(page) : 1;
+    limit = limit ? parseInt(limit) : 6;
+    const blogs = await Blog.find({
+      author: id,
+    })
+      .populate("author", "-password")
+      .skip((page - 1) * limit)
+      .limit(limit);
+    return res.status(200).send({ blogs });
   } catch (error) {
     console.error(error);
     return res.status(500).send({ message: "Internal Server Error" });
@@ -111,7 +116,9 @@ const updateBlog = async (req, res, next) => {
       updateBlog = await Blog.findOneAndUpdate({ _id: req.body.id }, req.body, {
         returnOriginal: false,
       });
-      return res.status(200).send({ message: "Blog updated", blog: newBlog });
+      return res
+        .status(200)
+        .send({ message: "Blog updated", blog: updateBlog });
     }
     return res.status(400).send({ message: "No data to update" });
   } catch (error) {

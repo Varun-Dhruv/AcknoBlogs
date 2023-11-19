@@ -13,9 +13,9 @@ const router = express.Router();
 
 router.get("/", getBlogs);
 
-router.get("/:id", getBlog);
+router.get("/author", getBlogByAuthor);
 
-router.get("/author/:id", getBlogByAuthor);
+router.get("/:id", getBlog);
 
 router.post(
   "/",

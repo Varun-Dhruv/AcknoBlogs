@@ -32,7 +32,7 @@ export default function Navbar() {
             <Box minW={"full"} bg={useColorModeValue('gray.100', 'gray.900')} px={{ md: 10, base: 6 }} >
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
                     <HStack spacing={{ md: 8 }} alignItems={'center'} >
-                        <Box pointerEvents='visibleStroke' onClick={() => { window.location.pathname = "/" }}><Text fontWeight={800} fontSize={20} color={'green.400'}>AcknoBlogs</Text></Box>
+                        <Box pointerEvents='visibleStroke' onClick={() => { router.push("/") }}><Text fontWeight={800} fontSize={20} color={'green.400'}>AcknoBlogs</Text></Box>
                     </HStack>
                     {!auth.state.authenticated ? (
                         <Flex alignItems={'center'}>
