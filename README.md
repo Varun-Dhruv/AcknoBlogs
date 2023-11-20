@@ -29,10 +29,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/Varun-Dhruv/AcknoBlogs">
-    <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
 <h3 align="center">AcknoBlogs</h3>
 
   <p align="center">
@@ -67,11 +63,9 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -81,7 +75,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `Varun-Dhruv`, `AcknoBlogs`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+It is a sample blog project developed for AcknoLedger.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -102,57 +96,41 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
+### Installation & Setup
 
-This is an example of how to list things you need to use the software and how to install them.
+Add the following keys in envs/.env.local
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+```
+  DATABASE_URL="mongo-database-url "
+  JWTPRIVATEKEY="myprivatekey"
+  NEXT_PUBLIC_SERVER_URL="backend-url"
+```
 
-### Installation
+To run the project on local use
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/Varun-Dhruv/AcknoBlogs.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
-   ```
+```
+ $ make compose-up
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+## Usage & Features
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+- [x] Authentication
+- [x] CRUD on blogs
+- [x] User Based Authorization
+- [x] Pagination
+- [x] Markdown Rendering
+- [x] File Handling
+
+<img src="docs/images/AllBlogs.png"></img>
+<img src="docs/images/createBlog.png"></img>
+<img src="docs/images/Homepage.png"></img>
+<img src="docs/images/UpdateDelete.png"></img>
 
 <!-- ROADMAP -->
-
-## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
-
-See the [open issues](https://github.com/Varun-Dhruv/AcknoBlogs/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
 
 ## Contributing
 
@@ -177,23 +155,11 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
-
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Varun Koranne - [@Varun-Dhruv](https://twitter.com/Varun-Dhruv) - korannevarun@gmail.com
 
 Project Link: [https://github.com/Varun-Dhruv/AcknoBlogs](https://github.com/Varun-Dhruv/AcknoBlogs)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- []()
-- []()
-- []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -217,5 +183,9 @@ Project Link: [https://github.com/Varun-Dhruv/AcknoBlogs](https://github.com/Var
 [Next-url]: https://nextjs.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Node.js]: https://reactjs.org/
+[Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
 [Node-url]: https://nodejs.org/en/
+[Express.js]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[Express-url]: https://expressjs.com/
+[MongoDB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[Mongo-url]: https://www.mongodb.com/

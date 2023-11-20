@@ -1,10 +1,17 @@
-.PHONY: all dev-core dev-ui clean deploy
+.PHONY: all dev-core dev-ui clean deploy compose-up compose-down
 
 all: 
 	@echo "make dev - build development version"
 	@echo "make test - run tests"
 	@echo "make clean - clean up"
 
+compose-up:
+	@echo "Starting docker-compose"
+	@docker-compose --profile app up -d
+
+compose-down:
+	@echo "Stopping docker-compose"
+	@docker-compose --profile app down
 install:
 	@echo "Installing dependencies"
 	
